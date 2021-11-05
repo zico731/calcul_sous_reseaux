@@ -66,7 +66,7 @@ print(f"{modele_IP[0:8]}.{modele_IP[8:16]}.{modele_IP[16:24]}.{modele_IP[24:32]}
 print(f"Le nouveau masque au format CIDR est : /{masque + nb_bit_SR}")
 
 # calcul du masque en ecriture décimale pointee
-print(f"Soit un masque en écriture décimale pointée : {cidr2mask(masque + nb_bit_SR)} ")
+print(f"Soit un masque en écriture décimale pointée : {cidr2mask(masque + nb_bit_SR)}\n")
 
 
 
