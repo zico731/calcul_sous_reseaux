@@ -45,14 +45,22 @@ for octet in liste_octet:
     oct=str("0")*(8-len(oct))+oct# on complète avec des 0 en préfixe
     chaine_ip += oct
     
-print(f"\nOn peut décomposer l'adresse réseau {adresse_ip} en : {chaine_ip[0:8]}.{chaine_ip[8:16]}.{chaine_ip[16:24]}.{chaine_ip[24:32]}")
+print(f"\nL'adresse réseau {adresse_ip} peut s'ecrire : {chaine_ip[0:8]}.{chaine_ip[8:16]}.{chaine_ip[16:24]}.{chaine_ip[24:32]}")
 
  
 
 
 # calcul du nombre de bit pour le sous réseaux
 nb_bit_SR=ceil(log(nb_SR,2))
-print(f"\nPour faire {nb_SR} sous-réseaux il faut donc réserver {nb_bit_SR} bits.") 
+print(f"\nPour faire {nb_SR} sous-réseaux il faut donc réserver {nb_bit_SR} bits",end=" ") 
+
+# affichage representative avec R, S et H
+print("donc l'adresse réseaux est sous la forme de :",end=" ")
+
+modele_IP="R"*masque+"S"*nb_bit_SR+"H"*(32-masque-nb_bit_SR)
+
+print(f"{modele_IP[0:8]}.{modele_IP[8:16]}.{modele_IP[16:24]}.{modele_IP[24:32]}\n")
+
 
 # cacul du masque CIDR
 print(f"Le nouveau masque au format CIDR est : /{masque + nb_bit_SR}")
@@ -60,12 +68,7 @@ print(f"Le nouveau masque au format CIDR est : /{masque + nb_bit_SR}")
 # calcul du masque en ecriture décimale pointee
 print(f"Soit un masque en écriture décimale pointée : {cidr2mask(masque + nb_bit_SR)} ")
 
-# affichage representative avec R, S et H
-print("\nOn peut donc maintenant représenter la nouvelle adresse réseau sous la forme de :",end=" ")
 
-modele_IP="R"*masque+"S"*nb_bit_SR+"H"*(32-masque-nb_bit_SR)
-
-print(f"{modele_IP[0:8]}.{modele_IP[8:16]}.{modele_IP[16:24]}.{modele_IP[24:32]}\n")
 
 # calcul de l'adresse du pc cherché au nieme rang en binaire
 res2bin=chaine_ip[0:masque]
@@ -86,4 +89,3 @@ print(f"Le hote recherché a pour IP binaire :{adresse_cherchee_bin[0:8]}.{adres
 adresse_ip_cherche=str(int(adresse_cherchee_bin[0:8],2))+"."+                    str(int(adresse_cherchee_bin[8:16],2))+"."+                    str(int(adresse_cherchee_bin[16:24],2))+"."+                    str(int(adresse_cherchee_bin[24:32],2))
 print("Soit en IPv4: " + adresse_ip_cherche)
 input("")
-
